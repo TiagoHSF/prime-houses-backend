@@ -28,7 +28,7 @@ public class ImoveisService {
     public Imovel criar(final ImovelDTO imovelDTO) throws Exception{
         try {
             if(Objects.nonNull(imovelDTO.getId())){
-                this.editar(imovelDTO);
+                return this.editar(imovelDTO);
             }
             Imovel imovelBase = new Imovel(imovelDTO);
             imovelBase = this.imoveisRepository.save(imovelBase);
