@@ -53,7 +53,7 @@ public class ImoveisController {
     ) throws Exception {
         try {
             final var api = this.imoveisService.listar();
-            return ResponseEntity.ok(api);
+            return null;
         } catch(Exception e) {
             throw new Exception(e.getMessage());
         }
