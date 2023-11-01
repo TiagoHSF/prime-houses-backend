@@ -66,7 +66,13 @@ public class DetalhesImovel extends GenericEntity {
         this.quantidadeCozinhas = detalhes.getQuantidadeCozinhas();
         this.quantidadeSuites = detalhes.getQuantidadeSuites();
         this.quantidadeAreasExternas = detalhes.getQuantidadeAreasExternas();
-        this.piscina
+        this.piscina = detalhes.getPiscina();
+        this.areaDeChurrasco = detalhes.getAreaDeChurrasco();
+        this.quantidadeVagasGaragem = detalhes.getQuantidadeVagasGaragem();
+        this.terrenoNivelado = detalhes.getTerrenoNivelado();
+        this.aguaLigada = detalhes.getAguaLigada();
+        this.acessoPavimentado = detalhes.getAcessoPavimentado();
+        this.energiaLigada = detalhes.getEnergiaLigada();
     }
 
 
