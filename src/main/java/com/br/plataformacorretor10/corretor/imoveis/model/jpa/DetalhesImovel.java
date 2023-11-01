@@ -75,6 +75,10 @@ public class DetalhesImovel extends GenericEntity {
         this.energiaLigada = detalhes.getEnergiaLigada();
     }
 
+    public DetalhesImovel() {
+
+    }
+
 
     public Long getTamanhoMtsQuadrados() {
         return tamanhoMtsQuadrados;
