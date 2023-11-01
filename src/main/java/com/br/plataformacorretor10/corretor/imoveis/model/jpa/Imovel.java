@@ -3,6 +3,7 @@ package com.br.plataformacorretor10.corretor.imoveis.model.jpa;
 import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.model.constants.FormasPagamento;
 import com.br.plataformacorretor10.model.constants.TipoImovel;
+import com.br.plataformacorretor10.model.jpa.Endereco;
 import com.br.plataformacorretor10.model.jpa.GenericEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -22,9 +23,13 @@ public class Imovel extends GenericEntity {
     @NotNull(message = "Descrição não informada!")
     private String descrição;
 
-    /* DETALHES AQUI */
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "detalhe_id", foreignKey = @ForeignKey(name = "fk_imovel_x_detalhe_imovel"))
+    private DetalhesImovel detalhes;
 
-    /* ENDEREÇO AQUI */
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "fk_imovel_x_endereco"))
+    private Endereco endereco;
 
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
@@ -120,5 +125,21 @@ public class Imovel extends GenericEntity {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public DetalhesImovel getDetalhes() {
+        return detalhes;
+    }
+
+    public void setDetalhes(DetalhesImovel detalhes) {
+        this.detalhes = detalhes;
     }
 }

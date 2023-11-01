@@ -6,8 +6,6 @@ import com.br.plataformacorretor10.model.util.CustomPageable;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +61,12 @@ public class ImoveisController {
         }
     }
 
+    /**
+     * Excluir imóvel
+     *
+     * @author Tiago
+     * @date 1 de nov de 2023
+     * */
     @DeleteMapping("excluir{id}")
     public void excluir(@PathParam("id") Long id) throws Exception{
         try {

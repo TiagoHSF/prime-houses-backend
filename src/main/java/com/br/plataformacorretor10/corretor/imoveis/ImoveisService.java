@@ -1,7 +1,10 @@
 package com.br.plataformacorretor10.corretor.imoveis;
 
 import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
+import com.br.plataformacorretor10.corretor.imoveis.model.jpa.DetalhesImovel;
 import com.br.plataformacorretor10.corretor.imoveis.model.jpa.Imovel;
+import com.br.plataformacorretor10.model.jpa.Endereco;
+import com.br.plataformacorretor10.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +25,9 @@ public class ImoveisService {
     @Autowired
     private ImoveisRepository imoveisRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     /**
      * Criar imóvel
      */
@@ -30,7 +36,19 @@ public class ImoveisService {
             if(Objects.nonNull(imovelDTO.getId())){
                 return this.editar(imovelDTO);
             }
+            /*ENDEREÇO*/
+            Endereco endereco = new Endereco(imovelDTO.endereco);
+            endereco = this.enderecoRepository.save(endereco);
+            /*ENDEREÇO*/
+
+            /*DETALHES*/
+            DetalhesImovel detalhes = new DetalhesImovel(imovelDTO.getDetalhes());
+            detalhes = this.
+            /*DETALHES*/
+
             Imovel imovelBase = new Imovel(imovelDTO);
+            imovelBase.setEndereco(endereco);
+
             imovelBase = this.imoveisRepository.save(imovelBase);
             return imovelBase;
         } catch (Exception e){
