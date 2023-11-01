@@ -1,13 +1,10 @@
 package com.br.plataformacorretor10.corretor.imoveis.model.dto;
 
-import com.br.plataformacorretor10.model.EnderecoDTO;
-import com.br.plataformacorretor10.model.GenericDTO;
+import com.br.plataformacorretor10.model.dto.EnderecoDTO;
+import com.br.plataformacorretor10.model.dto.GenericDTO;
 import com.br.plataformacorretor10.model.constants.FormasPagamento;
 import com.br.plataformacorretor10.model.constants.TipoImovel;
-import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.br.plataformacorretor10.model;
+package com.br.plataformacorretor10.model.dto;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,7 @@
 package com.br.plataformacorretor10.corretor.imoveis;
 
 import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
+import com.br.plataformacorretor10.corretor.imoveis.model.jpa.Imovel;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class ImoveisController {
      * @date 1 de nov de 2023
      * */
     @PostMapping("criar")
-    public @ResponseBody ResponseEntity<ImovelDTO> criar(@RequestBody ImovelDTO imovel) throws Exception {
+    public @ResponseBody ResponseEntity<Imovel> criar(@RequestBody ImovelDTO imovel) throws Exception {
         try {
             final var api = this.imoveisService.criar(imovel);
             return ResponseEntity.ok(api);
