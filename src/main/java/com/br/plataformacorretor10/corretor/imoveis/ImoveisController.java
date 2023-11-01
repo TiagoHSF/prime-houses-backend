@@ -60,13 +60,12 @@ public class ImoveisController {
     }
 
     @DeleteMapping("excluir{id}")
-    public @ResponseBody ResponseEntity<?> excluir(@PathParam("id") Long id) throws Exception{
+    public void excluir(@PathParam("id") Long id) throws Exception{
         try {
             if(Objects.isNull(id)){
                 throw new Exception("Imóvel não informado");
             }
-            final var api = this.imoveisService.excluir(id);
-            return ResponseEntity.ok(api);
+            this.imoveisService.excluir(id);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

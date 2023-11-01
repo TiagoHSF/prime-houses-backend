@@ -3,7 +3,10 @@ package com.br.plataformacorretor10.corretor.imoveis;
 import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.corretor.imoveis.model.jpa.Imovel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * Imóveis service
@@ -20,10 +23,9 @@ public class ImoveisService {
     /**
      * Criar imóvel
      */
-    public Imovel criar(final ImovelDTO imovel) throws Exception{
+    public Imovel criar(final ImovelDTO imovelDTO) throws Exception{
         try {
-            Imovel imovelBase = new Imovel();
-            imovelBase.setTitulo("teste");
+            Imovel imovelBase = new Imovel(imovelDTO);
             imovelBase = this.imoveisRepository.save(imovelBase);
             return imovelBase;
         } catch (Exception e){
@@ -34,10 +36,9 @@ public class ImoveisService {
     /**
      * Listar
      */
-    public ImovelDTO listar() throws Exception {
+    public Page<Imovel> listar() throws Exception {
         try {
-            ImovelDTO imovel = new ImovelDTO();
-            return imovel;
+            return null;
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -46,10 +47,9 @@ public class ImoveisService {
     /**
      * Excluir
      */
-    public ImovelDTO excluir(final Long id) throws Exception {
+    public void excluir(final Long id) throws Exception {
         try {
-            ImovelDTO imovel = new ImovelDTO();
-            return imovel;
+            this.imoveisRepository.deleteByImovelId(id, LocalDateTime.now());
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

@@ -27,13 +27,13 @@ public abstract class GenericEntity implements Serializable, Comparable<GenericE
     private Long id;
 
     @Column(name = "data_criacao")
-    private LocalDateTime dataCriacao = LocalDateTime.now();
+    private LocalDateTime dataCriacao;
 
     @Column(name = "data_desativacao")
-    private LocalDateTime dataDesativacao = LocalDateTime.now();
+    private LocalDateTime dataDesativacao;
 
     @Column(name = "data_atualizacao")
-    private LocalDateTime dataAtualizacao = LocalDateTime.now();
+    private LocalDateTime dataAtualizacao;
 
     public GenericEntity() {
     }

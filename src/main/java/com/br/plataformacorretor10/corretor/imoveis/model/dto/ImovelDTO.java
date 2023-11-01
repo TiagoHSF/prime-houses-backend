@@ -115,4 +115,12 @@ public class ImovelDTO extends GenericDTO {
     public void setEndereco(EnderecoDTO endereco) {
         this.endereco = endereco;
     }
+
+    public FormasPagamento getFormasPagamento() {
+        return formasPagamento;
+    }
+
+    public void setFormasPagamento(FormasPagamento formasPagamento) {
+        this.formasPagamento = formasPagamento;
+    }
 }
