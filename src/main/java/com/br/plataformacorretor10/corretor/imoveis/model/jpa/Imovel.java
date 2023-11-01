@@ -40,6 +40,9 @@ public class Imovel extends GenericEntity {
     @Enumerated(EnumType.STRING)
     public FormasPagamento formasPagamento;
 
+    @Column(name = "valor")
+    public Double valor;
+
     public Imovel(final ImovelDTO imovelDTO) {
         this.setDataCriacao(LocalDateTime.now());
         this.titulo = imovelDTO.getTitulo();
@@ -48,6 +51,7 @@ public class Imovel extends GenericEntity {
         this.seloVerificado = imovelDTO.getSeloVerificado();
         this.estrelasSelo = imovelDTO.getEstrelasSelo();
         this.formasPagamento = imovelDTO.getFormasPagamento();
+        this.valor = imovelDTO.getValor();
     }
 
     public Imovel() {
@@ -100,5 +104,21 @@ public class Imovel extends GenericEntity {
 
     public void setFormasPagamento(FormasPagamento formasPagamento) {
         this.formasPagamento = formasPagamento;
+    }
+
+    public TipoImovel getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoImovel tipo) {
+        this.tipo = tipo;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 }

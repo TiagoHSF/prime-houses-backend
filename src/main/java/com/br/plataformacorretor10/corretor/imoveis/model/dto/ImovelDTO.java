@@ -36,6 +36,9 @@ public class ImovelDTO extends GenericDTO {
     @NotNull(message = "Forma de pagamento não informada!")
     public FormasPagamento formasPagamento;
 
+    @NotNull(message = "Valor não informado!")
+    public Double valor;
+
     public ImovelDTO(){
 
     }
@@ -50,7 +53,9 @@ public class ImovelDTO extends GenericDTO {
         EnderecoDTO endereco,
         TipoImovel tipo,
         Boolean seloVerificado,
-        Integer estrelasSelo) {
+        Integer estrelasSelo,
+        FormasPagamento formasPagamento,
+        Double valor) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.detalhes = detalhes;
@@ -58,6 +63,8 @@ public class ImovelDTO extends GenericDTO {
         this.tipo = tipo;
         this.seloVerificado = seloVerificado;
         this.estrelasSelo = estrelasSelo;
+        this.formasPagamento = formasPagamento;
+        this.valor = valor;
     }
 
     public String getTitulo() {
@@ -122,5 +129,13 @@ public class ImovelDTO extends GenericDTO {
 
     public void setFormasPagamento(FormasPagamento formasPagamento) {
         this.formasPagamento = formasPagamento;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 }

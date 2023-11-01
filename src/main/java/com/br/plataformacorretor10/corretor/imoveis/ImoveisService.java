@@ -4,9 +4,11 @@ import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.corretor.imoveis.model.jpa.Imovel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Imóveis service
@@ -25,6 +27,9 @@ public class ImoveisService {
      */
     public Imovel criar(final ImovelDTO imovelDTO) throws Exception{
         try {
+            if(Objects.nonNull(imovelDTO.getId())){
+                this.editar(imovelDTO);
+            }
             Imovel imovelBase = new Imovel(imovelDTO);
             imovelBase = this.imoveisRepository.save(imovelBase);
             return imovelBase;
@@ -36,9 +41,10 @@ public class ImoveisService {
     /**
      * Listar
      */
-    public Page<Imovel> listar() throws Exception {
+    public Page<Imovel> listar(Pageable page) throws Exception {
         try {
-            return null;
+            Page<Imovel> imoveis = this.imoveisRepository.findImoveis(page);
+            return imoveis;
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -55,4 +61,15 @@ public class ImoveisService {
         }
     }
 
+    public Imovel editar(final ImovelDTO imovelDTO) throws Exception {
+        try {
+            Imovel imovelBD = this.imoveisRepository.findById(imovelDTO.getId()).orElseThrow(()-> new Exception("Imóvel não encontrado!"));
+            imovelBD = new Imovel(imovelDTO);
+            imovelBD.setId(imovelDTO.getId());
+            imovelBD = this.imoveisRepository.save(imovelBD);
+            return imovelBD;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

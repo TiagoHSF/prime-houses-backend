@@ -2,8 +2,12 @@ package com.br.plataformacorretor10.corretor.imoveis;
 
 import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.corretor.imoveis.model.jpa.Imovel;
+import com.br.plataformacorretor10.model.util.CustomPageable;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -46,14 +50,14 @@ public class ImoveisController {
      * @date 1 de nov de 2023
      * */
     @GetMapping("listar")
-    public @ResponseBody ResponseEntity<ImovelDTO> listar(
+    public @ResponseBody ResponseEntity<Page<Imovel>> listar(
         @RequestParam(value = "page", required = true, defaultValue = "0") final Integer page,
         @RequestParam(value = "size", required = true, defaultValue = "10") final Integer size,
-        @RequestParam(value = "order", required = false) final String query
+        @RequestParam(value = "order", required = false) final String order
     ) throws Exception {
         try {
-            final var api = this.imoveisService.listar();
-            return null;
+            final var api = this.imoveisService.listar(CustomPageable.generatePage(page, size, order));
+            return ResponseEntity.ok(api);
         } catch(Exception e) {
             throw new Exception(e.getMessage());
         }
