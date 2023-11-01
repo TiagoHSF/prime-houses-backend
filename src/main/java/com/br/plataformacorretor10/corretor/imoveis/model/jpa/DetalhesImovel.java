@@ -1,11 +1,14 @@
 package com.br.plataformacorretor10.corretor.imoveis.model.jpa;
 
+import com.br.plataformacorretor10.corretor.imoveis.model.dto.DetalhesImovelDTO;
 import com.br.plataformacorretor10.model.jpa.GenericEntity;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "detalhes_imovel")
@@ -53,6 +56,19 @@ public class DetalhesImovel extends GenericEntity {
 
     @Column(name = "possui_energia_ligada")
     public Boolean energiaLigada; //TERRENO/BARRACAO
+
+    public DetalhesImovel(DetalhesImovelDTO detalhes) {
+        this.setDataCriacao(LocalDateTime.now());
+        this.tamanhoMtsQuadrados = detalhes.getTamanhoMtsQuadrados();
+        this.quantidadeQuartos = detalhes.getQuantidadeQuartos();
+        this.quantidadeBanheiros = detalhes.getQuantidadeBanheiros();
+        this.quantidadeSalas = detalhes.getQuantidadeSalas();
+        this.quantidadeCozinhas = detalhes.getQuantidadeCozinhas();
+        this.quantidadeSuites = detalhes.getQuantidadeSuites();
+        this.quantidadeAreasExternas = detalhes.getQuantidadeAreasExternas();
+        this.piscina
+    }
+
 
     public Long getTamanhoMtsQuadrados() {
         return tamanhoMtsQuadrados;
