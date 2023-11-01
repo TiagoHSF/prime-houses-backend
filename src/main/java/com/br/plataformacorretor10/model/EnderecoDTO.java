@@ -1,5 +1,7 @@
 package com.br.plataformacorretor10.model;
 
+import jakarta.validation.constraints.NotNull;
+
 /**
  * Endereco
  *
@@ -8,17 +10,26 @@ package com.br.plataformacorretor10.model;
  * */
 public class EnderecoDTO {
 
+    @NotNull(message = "CEP não informado!")
     public Integer cep;
 
+    @NotNull(message = "Endereço não informado!")
     public String endereco;
 
+    @NotNull(message = "Bairro não informado!")
     public String bairro;
 
+    @NotNull(message = "Cidade não informada!")
     public String cidade;
 
+    @NotNull(message = "Estado não informado!")
     public String estado;
 
+    @NotNull(message = "Numero não informado!")
     public Integer numero;
+
+    @NotNull(message = "Complemento não informado!")
+    public String complemento;
 
     public String getEndereco() {
         return endereco;
@@ -68,15 +79,24 @@ public class EnderecoDTO {
         this.cep = cep;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(Integer cep, String endereco, String bairro, String cidade, String estado, Integer numero) {
+    public EnderecoDTO(Integer cep, String endereco, String bairro, String cidade, String estado, Integer numero, final String complemento) {
         this.cep = cep;
         this.endereco = endereco;
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
         this.numero = numero;
+        this.complemento = complemento;
     }
 }

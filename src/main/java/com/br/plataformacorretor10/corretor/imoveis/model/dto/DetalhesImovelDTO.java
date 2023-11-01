@@ -16,6 +16,8 @@ public class DetalhesImovelDTO {
 
     public Long quantidadeSalas;
 
+    public Long quantidadeCozinhas;
+
     public Long quantidadeSuites;
 
     public Long quantidadeAreasExternas;
@@ -25,6 +27,14 @@ public class DetalhesImovelDTO {
     public Boolean areaDeChurrasco;
 
     public Long quantidadeVagasGaragem;
+
+    public Boolean terrenoNivelado; //TERRENO
+
+    public Boolean aguaLigada; //TERRENO/BARRACAO
+
+    public Boolean acessoPavimentado; //TERRENO/BARRACAO
+
+    public Boolean energiaLigada; //TERRENO/BARRACAO
 
     public DetalhesImovelDTO() {
     }
@@ -99,5 +109,45 @@ public class DetalhesImovelDTO {
 
     public void setQuantidadeVagasGaragem(Long quantidadeVagasGaragem) {
         this.quantidadeVagasGaragem = quantidadeVagasGaragem;
+    }
+
+    public Boolean getTerrenoNivelado() {
+        return terrenoNivelado;
+    }
+
+    public void setTerrenoNivelado(Boolean terrenoNivelado) {
+        this.terrenoNivelado = terrenoNivelado;
+    }
+
+    public Boolean getAguaLigada() {
+        return aguaLigada;
+    }
+
+    public void setAguaLigada(Boolean aguaLigada) {
+        this.aguaLigada = aguaLigada;
+    }
+
+    public Boolean getAcessoPavimentado() {
+        return acessoPavimentado;
+    }
+
+    public void setAcessoPavimentado(Boolean acessoPavimentado) {
+        this.acessoPavimentado = acessoPavimentado;
+    }
+
+    public Boolean getEnergiaLigada() {
+        return energiaLigada;
+    }
+
+    public void setEnergiaLigada(Boolean energiaLigada) {
+        this.energiaLigada = energiaLigada;
+    }
+
+    public Long getQuantidadeCozinhas() {
+        return quantidadeCozinhas;
+    }
+
+    public void setQuantidadeCozinhas(Long quantidadeCozinhas) {
+        this.quantidadeCozinhas = quantidadeCozinhas;
     }
 }

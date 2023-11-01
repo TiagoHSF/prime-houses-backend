@@ -17,8 +17,8 @@ public class GenericDTO {
 
     public LocalDateTime dataAtualizacao;
 
-    public GenericDTO(Long id, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao) {
-
+    public GenericDTO() {
+        this.dataCriacao = LocalDateTime.now();
     }
 
     public Long getId() {

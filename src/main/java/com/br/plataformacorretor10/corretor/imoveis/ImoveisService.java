@@ -20,9 +20,22 @@ public class ImoveisService {
         }
     }
 
-    public ImovelDTO listar(){
-        ImovelDTO imovel = new ImovelDTO();
-        return imovel;
+    public ImovelDTO listar() throws Exception {
+        try {
+            ImovelDTO imovel = new ImovelDTO();
+            return imovel;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ImovelDTO excluir(final Long id) throws Exception {
+        try {
+            ImovelDTO imovel = new ImovelDTO();
+            return imovel;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
 }

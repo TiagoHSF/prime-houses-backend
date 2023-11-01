@@ -1,10 +1,13 @@
 package com.br.plataformacorretor10.corretor.imoveis;
 
 import com.br.plataformacorretor10.corretor.imoveis.model.dto.ImovelDTO;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 /**
  * Imóveis
@@ -42,11 +45,28 @@ public class ImoveisController {
      * @date 1 de nov de 2023
      * */
     @GetMapping("listar")
-    public @ResponseBody ResponseEntity<ImovelDTO> listar() throws Exception {
+    public @ResponseBody ResponseEntity<ImovelDTO> listar(
+        @RequestParam(value = "page", required = true, defaultValue = "0") final Integer page,
+        @RequestParam(value = "size", required = true, defaultValue = "10") final Integer size,
+        @RequestParam(value = "order", required = false) final String query
+    ) throws Exception {
         try {
             final var api = this.imoveisService.listar();
             return ResponseEntity.ok(api);
         } catch(Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("excluir{id}")
+    public @ResponseBody ResponseEntity<?> excluir(@PathParam("id") Long id) throws Exception{
+        try {
+            if(Objects.isNull(id)){
+                throw new Exception("Imóvel não informado");
+            }
+            final var api = this.imoveisService.excluir(id);
+            return ResponseEntity.ok(api);
+        } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }

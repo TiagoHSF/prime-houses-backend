@@ -4,6 +4,10 @@ import com.br.plataformacorretor10.model.EnderecoDTO;
 import com.br.plataformacorretor10.model.GenericDTO;
 import com.br.plataformacorretor10.model.constants.FormasPagamento;
 import com.br.plataformacorretor10.model.constants.TipoImovel;
+import jakarta.annotation.Nonnull;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
 
@@ -15,23 +19,28 @@ import java.time.LocalDateTime;
  * */
 public class ImovelDTO extends GenericDTO {
 
+    @NotNull(message = "Título não informado!")
     public String titulo;
 
+    @NotNull(message = "Descrição não informada!")
     public String descricao;
 
     public DetalhesImovelDTO detalhes;
 
+    @NotNull(message = "Endereço não informado!")
     public EnderecoDTO endereco;
+    @NotNull(message = "Tipo do imóvel não informado!")
     public TipoImovel tipo;
 
     public Boolean seloVerificado;
 
     public Integer estrelasSelo;
 
+    @NotNull(message = "Forma de pagamento não informada!")
     public FormasPagamento formasPagamento;
 
     public ImovelDTO(){
-        super(null, null, null);
+
     }
 
     public ImovelDTO(
@@ -45,7 +54,6 @@ public class ImovelDTO extends GenericDTO {
         TipoImovel tipo,
         Boolean seloVerificado,
         Integer estrelasSelo) {
-        super(null, null, null);
         this.titulo = titulo;
         this.descricao = descricao;
         this.detalhes = detalhes;
