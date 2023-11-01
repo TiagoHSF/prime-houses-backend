@@ -7,6 +7,8 @@ import com.br.plataformacorretor10.model.jpa.GenericEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "imovel")
 @Cacheable
@@ -39,6 +41,7 @@ public class Imovel extends GenericEntity {
     public FormasPagamento formasPagamento;
 
     public Imovel(final ImovelDTO imovelDTO) {
+        this.setDataCriacao(LocalDateTime.now());
         this.titulo = imovelDTO.getTitulo();
         this.descrição = imovelDTO.getDescricao();
         this.tipo = imovelDTO.getTipo();

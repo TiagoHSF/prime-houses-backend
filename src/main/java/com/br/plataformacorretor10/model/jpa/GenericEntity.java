@@ -2,6 +2,7 @@ package com.br.plataformacorretor10.model.jpa;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,7 +34,7 @@ public abstract class GenericEntity implements Serializable, Comparable<GenericE
     private LocalDateTime dataDesativacao;
 
     @Column(name = "data_atualizacao")
-    private LocalDateTime dataAtualizacao;
+    private LocalDateTime dataAtualizacao = LocalDateTime.now();
 
     public GenericEntity() {
     }
@@ -63,11 +64,17 @@ public abstract class GenericEntity implements Serializable, Comparable<GenericE
     }
 
     public LocalDateTime getDataCriacao() {
+        if(Objects.isNull(this.dataCriacao)){
+            this.dataCriacao = LocalDateTime.now();
+        }
         return dataCriacao;
     }
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+        if(Objects.isNull(this.dataCriacao)){
+            this.dataCriacao = LocalDateTime.now();
+        }
     }
 
     /**

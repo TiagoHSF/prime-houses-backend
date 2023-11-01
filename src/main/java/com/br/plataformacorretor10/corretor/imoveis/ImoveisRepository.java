@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 public interface ImoveisRepository extends JpaRepository<Imovel, Long> {
 
+    @Modifying
     @Query("UPDATE Imovel i SET i.dataDesativacao = :data WHERE i.id = :imovelId")
-    int deleteByImovelId(@Param("imovelId") Long imovelId, @Param("data") LocalDateTime data);
+    int desativarById(@Param("imovelId") Long imovelId, @Param("data") LocalDateTime data);
 }

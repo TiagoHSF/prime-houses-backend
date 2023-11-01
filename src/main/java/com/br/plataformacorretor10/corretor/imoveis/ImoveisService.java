@@ -49,7 +49,7 @@ public class ImoveisService {
      */
     public void excluir(final Long id) throws Exception {
         try {
-            this.imoveisRepository.deleteByImovelId(id, LocalDateTime.now());
+            this.imoveisRepository.desativarById(id, LocalDateTime.now());
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
