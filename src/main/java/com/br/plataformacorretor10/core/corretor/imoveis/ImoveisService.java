@@ -2,10 +2,12 @@ package com.br.plataformacorretor10.core.corretor.imoveis;
 
 import com.br.plataformacorretor10.core.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.core.corretor.imoveis.model.jpa.DetalhesImovel;
+import com.br.plataformacorretor10.core.corretor.imoveis.model.jpa.Imovel;
+import com.br.plataformacorretor10.core.model.jpa.Corretor;
 import com.br.plataformacorretor10.core.model.jpa.Endereco;
+import com.br.plataformacorretor10.core.repository.CorretorRepository;
 import com.br.plataformacorretor10.core.repository.DetalhesRepository;
 import com.br.plataformacorretor10.core.repository.EnderecoRepository;
-import com.br.plataformacorretor10.core.corretor.imoveis.model.jpa.Imovel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Imóveis service
@@ -32,11 +35,15 @@ public class ImoveisService {
     @Autowired
     private DetalhesRepository detalhesRepository;
 
+    @Autowired
+    private CorretorRepository corretorRepository;
+
     /**
      * Criar imóvel
      */
-    public Imovel criar(final ImovelDTO imovelDTO) throws Exception{
+    public Imovel criar(final ImovelDTO imovelDTO, final Long corretorId) throws Exception{
         try {
+            Imovel imovelBase = new Imovel(imovelDTO);
             if(Objects.nonNull(imovelDTO.getId())){
                 return this.editar(imovelDTO);
             }
@@ -50,7 +57,15 @@ public class ImoveisService {
             detalhes = this.detalhesRepository.save(detalhes);
             /*DETALHES*/
 
-            Imovel imovelBase = new Imovel(imovelDTO);
+            /* CORRETOR */
+            Optional<Corretor> corretor = this.corretorRepository.findById(corretorId);
+            if(corretor.isPresent()){
+                imovelBase.setCorretor(corretor.get());
+            } else {
+                throw new Exception("Corretor não informado!");
+            }
+            /* CORRETOR */
+
             imovelBase.setEndereco(endereco);
             imovelBase.setDetalhes(detalhes);
 
@@ -64,9 +79,9 @@ public class ImoveisService {
     /**
      * Listar
      */
-    public Page<Imovel> listar(Pageable page) throws Exception {
+    public Page<Imovel> listar(Pageable page, Long corretorId) throws Exception {
         try {
-            Page<Imovel> imoveis = this.imoveisRepository.findImoveis(page);
+            Page<Imovel> imoveis = this.imoveisRepository.findImoveis(page, corretorId);
             return imoveis;
         } catch (Exception e){
             throw new Exception(e.getMessage());

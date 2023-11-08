@@ -39,6 +39,8 @@ public class ImovelDTO extends GenericDTO {
     @NotNull(message = "Valor não informado!")
     public Double valor;
 
+    public Boolean validado;
+
     public ImovelDTO(){
 
     }
@@ -55,7 +57,8 @@ public class ImovelDTO extends GenericDTO {
         Boolean seloVerificado,
         Integer estrelasSelo,
         FormasPagamento formasPagamento,
-        Double valor) {
+        Double valor,
+        Boolean validado) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.detalhes = detalhes;
@@ -65,6 +68,7 @@ public class ImovelDTO extends GenericDTO {
         this.estrelasSelo = estrelasSelo;
         this.formasPagamento = formasPagamento;
         this.valor = valor;
+        this.validado = validado;
     }
 
     public String getTitulo() {
@@ -137,5 +141,13 @@ public class ImovelDTO extends GenericDTO {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Boolean getValidado() {
+        return validado;
+    }
+
+    public void setValidado(Boolean validado) {
+        this.validado = validado;
     }
 }

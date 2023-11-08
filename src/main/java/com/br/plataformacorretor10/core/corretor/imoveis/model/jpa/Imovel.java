@@ -2,7 +2,9 @@ package com.br.plataformacorretor10.core.corretor.imoveis.model.jpa;
 
 import com.br.plataformacorretor10.core.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.core.model.constants.FormasPagamento;
+import com.br.plataformacorretor10.core.model.constants.StatusImovel;
 import com.br.plataformacorretor10.core.model.constants.TipoImovel;
+import com.br.plataformacorretor10.core.model.jpa.Corretor;
 import com.br.plataformacorretor10.core.model.jpa.Endereco;
 import com.br.plataformacorretor10.core.model.jpa.GenericEntity;
 import jakarta.persistence.*;
@@ -32,6 +34,10 @@ public class Imovel extends GenericEntity {
     @JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "fk_imovel_x_endereco"))
     private Endereco endereco;
 
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "corretor_id", foreignKey = @ForeignKey(name = "fk_imovel_x_corretor"))
+    private Corretor corretor;
+
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
     private TipoImovel tipo;
@@ -48,6 +54,13 @@ public class Imovel extends GenericEntity {
 
     @Column(name = "valor")
     public Double valor;
+
+    @Column(name = "validado")
+    public Boolean validado = false;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusImovel status = StatusImovel.AGUARDANDO_APROVACAO;
 
     public Imovel(final ImovelDTO imovelDTO) {
         if(Objects.isNull(this.getDataCriacao())){
@@ -144,5 +157,29 @@ public class Imovel extends GenericEntity {
 
     public void setDetalhes(DetalhesImovel detalhes) {
         this.detalhes = detalhes;
+    }
+
+    public Boolean getValidado() {
+        return validado;
+    }
+
+    public void setValidado(Boolean validado) {
+        this.validado = validado;
+    }
+
+    public Corretor getCorretor() {
+        return corretor;
+    }
+
+    public void setCorretor(Corretor corretor) {
+        this.corretor = corretor;
+    }
+
+    public StatusImovel getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusImovel status) {
+        this.status = status;
     }
 }

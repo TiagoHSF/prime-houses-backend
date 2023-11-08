@@ -20,6 +20,7 @@ public interface ImoveisRepository extends JpaRepository<Imovel, Long> {
     @Query("UPDATE Imovel i SET i.dataDesativacao = :data WHERE i.id = :imovelId")
     int desativarById(@Param("imovelId") Long imovelId, @Param("data") LocalDateTime data);
 
-    @Query("SELECT i FROM Imovel i WHERE i.dataDesativacao is null")
-    Page<Imovel> findImoveis(Pageable pageable);
+    @Query("SELECT i FROM Imovel i JOIN Corretor c on i.corretor.id = :corretorId WHERE i.dataDesativacao is null" +
+        " AND i.status != 'AGUARDANDO APROVAÇÃO'")
+    Page<Imovel> findImoveis(Pageable pageable, Long corretorId);
 }

@@ -1,6 +1,7 @@
 package com.br.plataformacorretor10.core.usuario.model.dto;
 
 import com.br.plataformacorretor10.core.model.constants.TipoUsuario;
+import com.br.plataformacorretor10.core.model.dto.EnderecoDTO;
 import com.br.plataformacorretor10.core.model.dto.GenericDTO;
 
 import java.time.LocalDateTime;
@@ -32,6 +33,10 @@ public class UsuarioDTO extends GenericDTO {
     private Boolean codigoSegurancaConfirmado;
 
     private TipoUsuario tipo;
+
+    private EnderecoDTO enderecoDTO;
+
+    private String creci;
 
     public String getNome() {
         return nome;
@@ -107,5 +112,21 @@ public class UsuarioDTO extends GenericDTO {
 
     public void setCodigoSegurancaConfirmado(Boolean codigoSegurancaConfirmado) {
         this.codigoSegurancaConfirmado = codigoSegurancaConfirmado;
+    }
+
+    public EnderecoDTO getEnderecoDTO() {
+        return enderecoDTO;
+    }
+
+    public void setEnderecoDTO(EnderecoDTO enderecoDTO) {
+        this.enderecoDTO = enderecoDTO;
+    }
+
+    public String getCreci() {
+        return creci;
+    }
+
+    public void setCreci(String creci) {
+        this.creci = creci;
     }
 }

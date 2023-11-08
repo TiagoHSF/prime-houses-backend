@@ -1,6 +1,7 @@
 package com.br.plataformacorretor10.core.usuario.model.jpa;
 
 import com.br.plataformacorretor10.core.model.constants.TipoUsuario;
+import com.br.plataformacorretor10.core.model.jpa.Endereco;
 import com.br.plataformacorretor10.core.model.jpa.GenericEntity;
 import com.br.plataformacorretor10.core.usuario.model.dto.UsuarioDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,7 +43,7 @@ public class Usuario extends GenericEntity {
     @NotNull(message = "Data de nascimento não informada!")
     private LocalDateTime dataNascimento;
 
-    @Column(name = "documento")
+    @Column(name = "documento", unique = true)
     @NotNull(message = "Documento não informado!")
     private String documento;
 
@@ -52,6 +53,7 @@ public class Usuario extends GenericEntity {
     private String senha;
 
     @Column(name = "token")
+    @JsonIgnore
     private String token;
 
     @Column(name = "codigo_seguranca")
@@ -63,6 +65,10 @@ public class Usuario extends GenericEntity {
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
+
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "fk_usuario_x_endereco"))
+    private Endereco endereco;
 
     public Usuario(final UsuarioDTO usuarioDTO){
         if(Objects.isNull(this.getDataCriacao())){
@@ -190,5 +196,13 @@ public class Usuario extends GenericEntity {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

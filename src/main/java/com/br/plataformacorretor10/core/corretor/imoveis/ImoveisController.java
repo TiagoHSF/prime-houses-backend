@@ -32,9 +32,9 @@ public class ImoveisController {
      * @date 1 de nov de 2023
      * */
     @PostMapping("criar")
-    public @ResponseBody ResponseEntity<Imovel> criar(@RequestBody ImovelDTO imovel) throws Exception {
+    public @ResponseBody ResponseEntity<Imovel> criar(@RequestBody ImovelDTO imovel, @RequestParam("corretorId") final Long corretorId) throws Exception {
         try {
-            final var api = this.imoveisService.criar(imovel);
+            final var api = this.imoveisService.criar(imovel, corretorId);
             return ResponseEntity.ok(api);
         } catch(Exception e) {
             throw new Exception(e.getMessage());
@@ -51,10 +51,11 @@ public class ImoveisController {
     public @ResponseBody ResponseEntity<Page<Imovel>> listar(
         @RequestParam(value = "page", required = true, defaultValue = "0") final Integer page,
         @RequestParam(value = "size", required = true, defaultValue = "10") final Integer size,
-        @RequestParam(value = "order", required = false) final String order
+        @RequestParam(value = "order", required = false) final String order,
+        @RequestParam(value = "corretorId", required = false) final Long corretorId
     ) throws Exception {
         try {
-            final var api = this.imoveisService.listar(CustomPageable.generatePage(page, size, order));
+            final var api = this.imoveisService.listar(CustomPageable.generatePage(page, size, order), corretorId);
             return ResponseEntity.ok(api);
         } catch(Exception e) {
             throw new Exception(e.getMessage());
