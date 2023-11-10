@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.core.corretor.imoveis.model.jpa;
 
+import com.br.plataformacorretor10.core.corretor.empresa.model.jpa.Empresa;
 import com.br.plataformacorretor10.core.corretor.imoveis.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.core.model.constants.FormasPagamento;
 import com.br.plataformacorretor10.core.model.constants.StatusImovel;
@@ -32,11 +33,18 @@ public class Imovel extends GenericEntity {
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "endereco_id", foreignKey = @ForeignKey(name = "fk_imovel_x_endereco"))
+    @NotNull(message = "Endereço não informado!")
     private Endereco endereco;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "corretor_id", foreignKey = @ForeignKey(name = "fk_imovel_x_corretor"))
+    @NotNull(message = "Corretor não informado!")
     private Corretor corretor;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "empresa_id", foreignKey = @ForeignKey(name = "fk_imovel_x_empresa"))
+    @NotNull(message = "Empresa não informada!")
+    private Empresa empresa;
 
     @Column(name = "tipo")
     @Enumerated(EnumType.STRING)
@@ -181,5 +189,13 @@ public class Imovel extends GenericEntity {
 
     public void setStatus(StatusImovel status) {
         this.status = status;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }

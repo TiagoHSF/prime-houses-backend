@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.core.corretor.imoveis.model.dto;
 
+import com.br.plataformacorretor10.core.corretor.empresa.model.dto.EmpresaDTO;
 import com.br.plataformacorretor10.core.model.dto.EnderecoDTO;
 import com.br.plataformacorretor10.core.model.dto.GenericDTO;
 import com.br.plataformacorretor10.core.model.constants.FormasPagamento;
@@ -40,6 +41,8 @@ public class ImovelDTO extends GenericDTO {
     public Double valor;
 
     public Boolean validado;
+
+    public EmpresaDTO empresaDTO;
 
     public ImovelDTO(){
 
@@ -149,5 +152,13 @@ public class ImovelDTO extends GenericDTO {
 
     public void setValidado(Boolean validado) {
         this.validado = validado;
+    }
+
+    public EmpresaDTO getEmpresaDTO() {
+        return empresaDTO;
+    }
+
+    public void setEmpresaDTO(EmpresaDTO empresaDTO) {
+        this.empresaDTO = empresaDTO;
     }
 }

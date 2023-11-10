@@ -8,6 +8,7 @@ import com.br.plataformacorretor10.core.model.jpa.Endereco;
 import com.br.plataformacorretor10.core.repository.CorretorRepository;
 import com.br.plataformacorretor10.core.repository.DetalhesRepository;
 import com.br.plataformacorretor10.core.repository.EnderecoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,7 @@ public class ImoveisService {
     /**
      * Criar imóvel
      */
+    @Transactional(rollbackOn = Exception.class)
     public Imovel criar(final ImovelDTO imovelDTO, final Long corretorId) throws Exception{
         try {
             Imovel imovelBase = new Imovel(imovelDTO);
@@ -66,6 +68,14 @@ public class ImoveisService {
             }
             /* CORRETOR */
 
+            /* EMPRESA */
+            if(Objects.nonNull(corretor.get().getEmpresa())){
+                imovelBase.setEmpresa(corretor.get().getEmpresa());
+            } else {
+                throw new Exception("Empresa não informada!");
+            }
+            /* */
+
             imovelBase.setEndereco(endereco);
             imovelBase.setDetalhes(detalhes);
 
@@ -79,9 +89,9 @@ public class ImoveisService {
     /**
      * Listar
      */
-    public Page<Imovel> listar(Pageable page, Long corretorId) throws Exception {
+    public Page<Imovel> listar(Pageable page, Long empresaId) throws Exception {
         try {
-            Page<Imovel> imoveis = this.imoveisRepository.findImoveis(page, corretorId);
+            Page<Imovel> imoveis = this.imoveisRepository.findImoveis(page, empresaId);
             return imoveis;
         } catch (Exception e){
             throw new Exception(e.getMessage());

@@ -1,6 +1,8 @@
 package com.br.plataformacorretor10.core.model.jpa;
 
+import com.br.plataformacorretor10.core.corretor.empresa.model.jpa.Empresa;
 import com.br.plataformacorretor10.core.usuario.model.jpa.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 /**
@@ -20,6 +22,11 @@ public class Corretor extends GenericEntity {
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "fk_corretor_x_usuario"))
     private Usuario usuario;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "empresa_id", foreignKey = @ForeignKey(name = "fk_corretor_x_empresa"))
+    private Empresa empresa;
 
     @Column(name = "validado")
     private Boolean validado = false;
@@ -54,5 +61,13 @@ public class Corretor extends GenericEntity {
 
     public void setValidado(Boolean validado) {
         this.validado = validado;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 }
