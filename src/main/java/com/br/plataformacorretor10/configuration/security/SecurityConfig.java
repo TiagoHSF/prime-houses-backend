@@ -49,7 +49,7 @@ public class SecurityConfig {
             .sessionManagement(session ->
                 session
                     .maximumSessions(1))
-        .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class).cors();
 
         return httpSecurity.build();
     }
