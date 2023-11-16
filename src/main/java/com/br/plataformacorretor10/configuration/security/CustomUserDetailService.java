@@ -1,7 +1,7 @@
 package com.br.plataformacorretor10.configuration.security;
 
-import com.br.plataformacorretor10.core.usuario.UsuarioRepository;
-import com.br.plataformacorretor10.core.usuario.model.jpa.Usuario;
+import com.br.plataformacorretor10.repository.UsuarioRepository;
+import com.br.plataformacorretor10.model.jpa.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
