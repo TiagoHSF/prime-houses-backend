@@ -11,6 +11,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * The Class AuthService
  *
@@ -50,8 +52,19 @@ public class AuthService {
             token = token.replace("Bearer ", "");
             usuario.setToken(token);
             this.usuarioRepository.save(usuario);
-            return "Bearer " + token;
+            return token;
         } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public Usuario findUser(final String token) throws Exception {
+        try {
+            if(Objects.isNull(token)){
+                throw new Exception("Token inválido");
+            }
+            return  this.usuarioRepository.findUsuarioByToken(token);
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
