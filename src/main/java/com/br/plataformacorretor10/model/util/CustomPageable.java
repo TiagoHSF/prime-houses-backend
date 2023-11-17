@@ -10,7 +10,7 @@ public class CustomPageable {
 
     public static Pageable generatePage(final Integer page, final Integer size, final String order){
         Sort sort;
-        if (Objects.nonNull(order)) {
+        if (Objects.nonNull(order) && !order.isEmpty()) {
             sort = Sort.by(Sort.Order.asc(order));
         } else {
             sort = Sort.by(Sort.Order.asc("id"));

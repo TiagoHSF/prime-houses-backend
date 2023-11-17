@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.service;
 
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.model.dto.ImovelDTO;
 import com.br.plataformacorretor10.model.jpa.DetalhesImovel;
 import com.br.plataformacorretor10.model.jpa.Imovel;
@@ -44,7 +45,7 @@ public class ImoveisService {
      * Criar imóvel
      */
     @Transactional(rollbackOn = Exception.class)
-    public Imovel criar(final ImovelDTO imovelDTO, final Long corretorId) throws Exception{
+    public Imovel criar(final ImovelDTO imovelDTO, final Long corretorId) throws ServiceException {
         try {
             Imovel imovelBase = new Imovel(imovelDTO);
             if(Objects.nonNull(imovelDTO.getId())){
@@ -83,34 +84,34 @@ public class ImoveisService {
             imovelBase = this.imoveisRepository.save(imovelBase);
             return imovelBase;
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
     /**
      * Listar
      */
-    public Page<Imovel> listar(Pageable page, Long empresaId) throws Exception {
+    public Page<Imovel> listar(Pageable page, Long empresaId) throws ServiceException {
         try {
             Page<Imovel> imoveis = this.imoveisRepository.findImoveis(page, empresaId);
             return imoveis;
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
     /**
      * Excluir
      */
-    public void excluir(final Long id) throws Exception {
+    public void excluir(final Long id) throws ServiceException {
         try {
             this.imoveisRepository.desativarById(id, LocalDateTime.now());
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
-    public Imovel editar(final ImovelDTO imovelDTO) throws Exception {
+    public Imovel editar(final ImovelDTO imovelDTO) throws ServiceException {
         try {
             Imovel imovelBD = this.imoveisRepository.findById(imovelDTO.getId()).orElseThrow(()-> new Exception("Imóvel não encontrado!"));
             imovelBD = new Imovel(imovelDTO);
@@ -118,7 +119,7 @@ public class ImoveisService {
             imovelBD = this.imoveisRepository.save(imovelBD);
             return imovelBD;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 }

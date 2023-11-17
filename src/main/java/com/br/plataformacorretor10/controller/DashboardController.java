@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.controller;
 
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +24,14 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
-    public @ResponseBody ResponseEntity<Map<String, Object>> dashboard(
+    public @ResponseBody ResponseEntity<?> dashboard(
         @RequestParam("empresaId") final Long empresaId
-    ) throws Exception {
+    ) throws ServiceException {
       try {
             final Map<String, Object> api = this.dashboardService.dashboard(empresaId);
             return ResponseEntity.ok(api);
       } catch (Exception e){
-          throw new Exception(e.getMessage());
+          throw new ServiceException(e.getMessage());
       }
     }
 

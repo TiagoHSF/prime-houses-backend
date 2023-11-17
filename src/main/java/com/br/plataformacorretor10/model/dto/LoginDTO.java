@@ -27,4 +27,12 @@ public class LoginDTO {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public LoginDTO(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public LoginDTO() {
+    }
 }

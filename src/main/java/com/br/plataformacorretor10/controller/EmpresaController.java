@@ -1,8 +1,8 @@
 package com.br.plataformacorretor10.controller;
 
-import com.br.plataformacorretor10.service.EmpresaService;
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.model.dto.EmpresaDTO;
-import com.br.plataformacorretor10.model.jpa.Empresa;
+import com.br.plataformacorretor10.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,13 +22,13 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @PostMapping("criar")
-    public @ResponseBody ResponseEntity<Empresa> criar(@RequestBody EmpresaDTO empresaDTO,
-        @RequestParam("corretorId") final Long corretorId) throws Exception {
+    public @ResponseBody ResponseEntity<?> criar(@RequestBody EmpresaDTO empresaDTO,
+        @RequestParam("corretorId") final Long corretorId) throws ServiceException {
         try {
             final var api = this.empresaService.criar(empresaDTO, corretorId);
             return ResponseEntity.ok(api);
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 

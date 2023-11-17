@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.service;
 
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.repository.DashboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class DashboardService {
     @Autowired
     private DashboardRepository dashboardRepository;
 
-    public Map<String, Object> dashboard(final Long empresaId) throws Exception {
+    public Map<String, Object> dashboard(final Long empresaId) throws ServiceException {
         try {
             if(Objects.isNull(empresaId)){
                 throw new Exception("Corretor não informado!");
@@ -27,7 +28,7 @@ public class DashboardService {
             Map<String, Object> dashboard = this.dashboardRepository.dashboard(empresaId);
             return dashboard;
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 }

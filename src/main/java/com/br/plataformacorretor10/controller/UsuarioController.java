@@ -1,8 +1,9 @@
 package com.br.plataformacorretor10.controller;
 
-import com.br.plataformacorretor10.service.UsuarioService;
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.model.dto.UsuarioDTO;
 import com.br.plataformacorretor10.model.jpa.Usuario;
+import com.br.plataformacorretor10.service.UsuarioService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,21 +27,21 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("criar")
-    public @ResponseBody ResponseEntity<Usuario> criar(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
+    public @ResponseBody ResponseEntity<?> criar(@RequestBody UsuarioDTO usuarioDTO) throws ServiceException {
         try {
             final Usuario usuario = this.usuarioService.criar(usuarioDTO);
             return ResponseEntity.ok(usuario);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PostMapping("validar-codigo/{codigo}")
-    public void validarCodigo(@PathParam("codigo") Integer codigo) throws Exception {
+    public void validarCodigo(@PathParam("codigo") Integer codigo) throws ServiceException {
         try {
 
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 

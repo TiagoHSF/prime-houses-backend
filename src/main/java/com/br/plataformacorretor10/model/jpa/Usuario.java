@@ -1,8 +1,6 @@
 package com.br.plataformacorretor10.model.jpa;
 
 import com.br.plataformacorretor10.model.constants.TipoUsuario;
-import com.br.plataformacorretor10.model.jpa.Endereco;
-import com.br.plataformacorretor10.model.jpa.GenericEntity;
 import com.br.plataformacorretor10.model.dto.UsuarioDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -53,7 +51,6 @@ public class Usuario extends GenericEntity {
     private String senha;
 
     @Column(name = "token")
-    @JsonIgnore
     private String token;
 
     @Column(name = "codigo_seguranca")

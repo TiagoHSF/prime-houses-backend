@@ -69,6 +69,9 @@ public class Imovel extends GenericEntity {
     @Column(name = "porcentagem_comissao")
     public Double porcentagemComissao;
 
+    @Column(name = "codigo")
+    public Long codigo;
+
     public Imovel(final ImovelDTO imovelDTO) {
         if(Objects.isNull(this.getDataCriacao())){
             this.setDataCriacao(LocalDateTime.now());
@@ -204,5 +207,13 @@ public class Imovel extends GenericEntity {
 
     public void setPorcentagemComissao(Double porcentagemComissao) {
         this.porcentagemComissao = porcentagemComissao;
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 }

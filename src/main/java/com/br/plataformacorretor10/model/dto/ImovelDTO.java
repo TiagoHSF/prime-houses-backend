@@ -43,6 +43,8 @@ public class ImovelDTO extends GenericDTO {
 
     public Double porcentagemComissao;
 
+    public Long codigo;
+
     public ImovelDTO(){
 
     }
@@ -167,5 +169,13 @@ public class ImovelDTO extends GenericDTO {
 
     public void setPorcentagemComissao(Double porcentagemComissao) {
         this.porcentagemComissao = porcentagemComissao;
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 }

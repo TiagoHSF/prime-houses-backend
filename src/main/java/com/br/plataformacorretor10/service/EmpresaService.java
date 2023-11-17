@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.service;
 
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.repository.EmpresaRepository;
 import com.br.plataformacorretor10.model.dto.EmpresaDTO;
 import com.br.plataformacorretor10.model.jpa.Empresa;
@@ -27,7 +28,7 @@ public class EmpresaService {
     private CorretorRepository corretorRepository;
 
     @Transactional(rollbackOn = Exception.class)
-    public Empresa criar(final EmpresaDTO empresaDTO, final Long corretorId) throws Exception {
+    public Empresa criar(final EmpresaDTO empresaDTO, final Long corretorId) throws ServiceException {
         try {
             Empresa empresa = new Empresa(empresaDTO);
             if(Objects.nonNull(empresa.getDocumento()) && empresa.getDocumento().length() < 14){
@@ -41,7 +42,7 @@ public class EmpresaService {
 
             return empresa;
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 }

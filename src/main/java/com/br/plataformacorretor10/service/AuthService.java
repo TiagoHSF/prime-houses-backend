@@ -3,6 +3,7 @@ package com.br.plataformacorretor10.service;
 import com.br.plataformacorretor10.configuration.security.CustomUserDetailService;
 import com.br.plataformacorretor10.configuration.security.JwtTokenProvider;
 import com.br.plataformacorretor10.configuration.security.SecurityConfig;
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.model.dto.LoginDTO;
 import com.br.plataformacorretor10.repository.UsuarioRepository;
 import com.br.plataformacorretor10.model.jpa.Usuario;
@@ -36,7 +37,7 @@ public class AuthService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public String login (final LoginDTO login) throws Exception {
+    public Usuario login (final LoginDTO login) throws ServiceException {
         try {
             final UserDetails userDetails = this.customUserDetailService.loadUserByUsername(login.getEmail());
 
@@ -51,10 +52,9 @@ public class AuthService {
             Usuario usuario = this.usuarioRepository.findUsuarioByEmail(login.getEmail());
             token = token.replace("Bearer ", "");
             usuario.setToken(token);
-            this.usuarioRepository.save(usuario);
-            return token;
+            return this.usuarioRepository.save(usuario);
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class AuthService {
             }
             return  this.usuarioRepository.findUsuarioByToken(token);
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 }

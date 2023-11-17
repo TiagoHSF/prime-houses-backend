@@ -1,5 +1,6 @@
 package com.br.plataformacorretor10.controller;
 
+import com.br.plataformacorretor10.exception.ServiceException;
 import com.br.plataformacorretor10.service.AuthService;
 import com.br.plataformacorretor10.model.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +23,23 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("login")
-    public @ResponseBody ResponseEntity<String> login(@RequestBody LoginDTO login) throws Exception {
+    public @ResponseBody ResponseEntity<?> login(@RequestBody LoginDTO login) throws ServiceException {
         try {
-            final String token = this.authService.login(login);
-            return ResponseEntity.ok(token);
+            final Usuario usuario = this.authService.login(login);
+            return ResponseEntity.ok(usuario);
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
     @GetMapping("find-usuario")
     @ResponseBody
-    private ResponseEntity<Usuario> findUser(@RequestParam("token") final String token) throws Exception {
+    private ResponseEntity<?> findUser(@RequestParam("token") final String token) throws ServiceException {
         try {
             final Usuario usuario = this.authService.findUser(token);
             return ResponseEntity.ok(usuario);
         } catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ServiceException(e.getMessage());
         }
     }
 
