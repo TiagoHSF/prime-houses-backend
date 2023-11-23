@@ -33,7 +33,7 @@ public class ImoveisController {
      * @date 1 de nov de 2023
      * */
     @PostMapping("criar")
-    public @ResponseBody ResponseEntity<Imovel> criar(@RequestBody ImovelDTO imovel, @RequestParam("corretorId") final Long corretorId, @RequestParam("empresaId") final Long empresaId) throws ServiceException {
+    public @ResponseBody ResponseEntity<Imovel> criar(@RequestBody ImovelDTO imovel, @RequestParam("corretorId") final Long corretorId) throws ServiceException {
         try {
             final var api = this.imoveisService.criar(imovel, corretorId);
             return ResponseEntity.ok(api);
